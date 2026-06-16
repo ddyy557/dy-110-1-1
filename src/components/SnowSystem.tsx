@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useStore } from '@/store/useStore'
 
-const SNOW_COUNT = 2000
+const SNOW_COUNT = 1000
 const AREA_SIZE = 12
 const AREA_HEIGHT = 10
 
@@ -25,7 +25,7 @@ export default function SnowSystem() {
       velocities[i * 3 + 1] = -(0.3 + Math.random() * 0.5)
       velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.3
 
-      sizes[i] = 1.0 + Math.random() * 2.0
+      sizes[i] = 0.4 + Math.random() * 0.8
     }
 
     return { positions, velocities, sizes }
@@ -44,9 +44,9 @@ export default function SnowSystem() {
           vec4 modelPosition = modelMatrix * vec4(position, 1.0);
           vec4 viewPosition = viewMatrix * modelPosition;
           gl_Position = projectionMatrix * viewPosition;
-          gl_PointSize = aSize * uPixelRatio * (200.0 / -viewPosition.z);
+          gl_PointSize = aSize * uPixelRatio * (120.0 / -viewPosition.z);
           gl_PointSize = max(gl_PointSize, 0.5);
-          vAlpha = smoothstep(0.0, 1.0, position.y / 10.0) * 0.6 + 0.2;
+          vAlpha = smoothstep(0.0, 1.0, position.y / 10.0) * 0.3 + 0.1;
         }
       `,
       fragmentShader: `

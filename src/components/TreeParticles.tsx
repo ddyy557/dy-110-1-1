@@ -99,9 +99,13 @@ export default function TreeParticles() {
     const t = state.clock.getElapsedTime()
     shaderMaterial.uniforms.uTime.value = t
 
-    const autoRotation = t * rotationSpeed
-    const mouseInfluenceX = mouseX * 0.3
-    const mouseInfluenceY = mouseY * 0.15
+    const currentRotationSpeed = useStore.getState().rotationSpeed
+    const currentMouseX = useStore.getState().mouseX
+    const currentMouseY = useStore.getState().mouseY
+
+    const autoRotation = t * currentRotationSpeed
+    const mouseInfluenceX = currentMouseX * 0.3
+    const mouseInfluenceY = currentMouseY * 0.15
     pointsRef.current.rotation.y = autoRotation + mouseInfluenceX
     pointsRef.current.rotation.x = mouseInfluenceY
   })

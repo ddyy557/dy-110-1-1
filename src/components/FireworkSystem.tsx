@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useStore } from '@/store/useStore'
 
-const FIREWORK_PARTICLES = 300
+const FIREWORK_PARTICLES = 150
 const FIREWORK_DURATION = 2000
 
 interface SingleFireworkProps {
@@ -38,7 +38,7 @@ function SingleFirework({ id, position, onDone }: SingleFireworkProps) {
 
       const theta = Math.random() * Math.PI * 2
       const phi = Math.random() * Math.PI
-      const speed = 1.5 + Math.random() * 3.0
+      const speed = 0.8 + Math.random() * 1.5
 
       velocities[i * 3] = Math.sin(phi) * Math.cos(theta) * speed
       velocities[i * 3 + 1] = Math.sin(phi) * Math.sin(theta) * speed
@@ -49,7 +49,7 @@ function SingleFirework({ id, position, onDone }: SingleFireworkProps) {
       colors[i * 3 + 1] = color.g
       colors[i * 3 + 2] = color.b
 
-      sizes[i] = 2.0 + Math.random() * 3.0
+      sizes[i] = 0.8 + Math.random() * 1.5
     }
 
     velocityRef.current = velocities
@@ -73,7 +73,7 @@ function SingleFirework({ id, position, onDone }: SingleFireworkProps) {
           vec4 modelPosition = modelMatrix * vec4(position, 1.0);
           vec4 viewPosition = viewMatrix * modelPosition;
           gl_Position = projectionMatrix * viewPosition;
-          gl_PointSize = aSize * uPixelRatio * (250.0 / -viewPosition.z);
+          gl_PointSize = aSize * uPixelRatio * (150.0 / -viewPosition.z);
           gl_PointSize = max(gl_PointSize, 0.5);
         }
       `,
